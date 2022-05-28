@@ -1,0 +1,27 @@
+{
+
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true,
+    "**/node_modules": true
+  },
+
+  "editor.tabSize": 2,
+
+  "window.title": "🤟 Super Store ${separator}${dirty}${activeEditorShort}",
+
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#046865",
+    "statusBar.foreground": "#fff",
+    "titleBar.activeBackground": "#046865",
+    "titleBar.activeForeground": "#fff",
+    "titleBar.inactiveForeground": "#fff",
+    "titleBar.inactiveBackground": "#75c2bf"
+  },
+
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+
+  "eslint.enable": true
+}

@@ -1,0 +1,39 @@
+.category {
+
+  h3 {
+    font-size: 2rem;
+    text-transform: capitalize;
+    margin: 15px 0 15px 0;
+
+    a {
+      color: #666666;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    a::before {
+      position: absolute;
+      content: "";
+      background-color: rgb(96, 174, 251);
+      height: 4px;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+
+      transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    a:hover::before {
+      right: 0;
+    }
+  }
+
+  .section-categories {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 300px;
+    gap: 20px;
+  }
+}

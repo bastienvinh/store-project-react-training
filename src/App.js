@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import './App.css'
+import Layout from './components/Layout/Layout.component'
+import { getCategories, getProducts } from './features/products/productsSlice'
+import { calculateItem, calculateTotal } from "./features/carts/cartSlice"
+import Categories from './pages/Categories/Categories'
+import Home from './pages/Home/Home'
+import Products from './pages/Products/Products'
+import Cart from './pages/Cart/Cart'
 
 function App() {
+  const dispatch = useDispatch()
+  const { isLoading } = useSelector((store) => store.products)
+  const { items } = useSelector(store => store.cart)
+
+  useEffect(() => {
+    dispatch(getProducts())
+    dispatch(getCategories())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(calculateItem())
+    dispatch(calculateTotal())
+  }, [items, dispatch])
+
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <h1>Loading ...</h1>
+      </div>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="products" element={<Products />} />
+          <Route path="categories/:category" element={<Categories />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
